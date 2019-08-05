@@ -24,7 +24,6 @@ var randomTags = new Vue({
             method: "get",
             url:"/queryRandomTags",
         }).then(function (resp) {
-            console.log(resp );
             var result = [];
             for (var i = 0; i < resp.data.data.length ; i ++) {
                 result.push({text:resp.data.data[i].tag, link: "/?tag=" + resp.data.data[i].tag})
@@ -71,7 +70,10 @@ var newComments = new Vue({
             for (var i = 0; i < resp.data.data.length; i++) {
                 var temp ={};
                 temp.name = resp.data.data[i].user_name;
-                temp.date = resp.data.data[i].ctime;
+                let time = resp.data.data[i].ctime;
+                let date = new Date(time * 1000);
+                let datetime = date.getFullYear() + "年" + (date.getMonth() + 1) + "月" + date.getDate() + "日 " + date.getHours() + ":" + date.getMinutes()
+                temp.date =datetime;
                 temp.comment = resp.data.data[i].comments
                 result.push(temp);
             }

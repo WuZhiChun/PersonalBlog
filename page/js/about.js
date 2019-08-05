@@ -32,7 +32,6 @@ var blogComments = new Vue({
             method: "get",
             url: "/queryCommentsCountByBlogId?bid=" + bid
         }).then(function (resp) {
-            console.log(resp);
             blogComments.total = resp.data.data[0].count;
         }).catch(function (resp) {
             console.log("请求错误")
@@ -55,7 +54,7 @@ var sendComment = new Vue({
                     method: "get",
                     url: "/queryRandomCode"
                 }).then(function (resp) {
-                    console.log(resp);
+                    // console.log(resp);
                     sendComment.vcode = resp.data.data.data;
                     sendComment.rightCode = resp.data.data.text;
                 });

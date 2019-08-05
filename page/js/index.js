@@ -72,7 +72,10 @@ var articleList = new Vue({
                             var temp = {};
                             temp.title = result[i].title;
                             temp.content = result[i].content;
-                            temp.date = result[i].ctime;
+                            let time = result[i].ctime;
+                            let date = new Date(time * 1000);
+                            let datetime = date.getFullYear() + "年" + (date.getMonth() + 1) + "月" + date.getDate() + "日 " + date.getHours() + ":" + date.getMinutes()
+                            temp.date =datetime;
                             temp.views = result[i].views;
                             temp.tags = result[i].tags;
                             temp.id = result[i].id;
@@ -85,13 +88,13 @@ var articleList = new Vue({
                         console.log("请求错误");
                     });
 
-                    // axios({
-                    //     method: "get",
-                    //     url: "/queryBlogCount"
-                    // }).then(function(resp) {
-                    //     articleList.count = resp.data.data[0].count;
-                    //     articleList.generatePageTool;
-                    // });
+                    axios({
+                        method: "get",
+                        url: "/queryBlogCount"
+                    }).then(function(resp) {
+                        articleList.count = resp.data.data[0].count;
+                        articleList.generatePageTool;
+                    });
                 } else {
                     axios({
                         method: "get",
